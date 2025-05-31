@@ -1,101 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models</title>
+  <meta charset="UTF-8" />
+  <title>Auto‑Patching: Enhancing Multi‑Hop Reasoning in Language Models</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  
   <style>
+    :root {
+      --primary: #2563eb;        /* blue‑600 */
+      --primary-dark: #1e4fbe;  /* darker shade */
+      --bg: #f8fafc;            /* slate‑50 */
+      --text: #111827;          /* slate‑900 */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      margin: 40px;
-      background-color: #f9f9f9;
-      color: #333;
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
     }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+
+    /* ——— Hero ——— */
+    .hero {
+      padding: 5rem 1.5rem 6rem; /* extra bottom padding for card overlap */
+      text-align: center;
+      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%); /* indigo‑500 → blue‑500 */
+      color: #ffffff;
+      position: relative;
     }
+
+    .hero h1 {
+      font-size: 3rem; /* 48px */
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 1.25rem; /* 20px */
+      margin-top: 0.75rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* ——— Layout ——— */
+    .container {
+      max-width: 900px;
+      margin: -4rem auto 2.5rem; /* pull card upward */
+      padding: 0 1.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1rem; /* 16px */
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ——— Metadata ——— */
     .authors {
-      font-size: 18px;
-      margin-bottom: 5px;
+      font-size: 1.125rem; /* 18px */
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: #374151; /* slate‑700 */
     }
+
     .institution {
+      font-size: 1rem;
       font-style: italic;
-      font-size: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
+      color: #6b7280; /* slate‑500 */
     }
-    .abstract-title {
-      font-weight: bold;
-      margin-top: 30px;
-      font-size: 22px;
+
+    /* ——— Section titles ——— */
+    .section-title {
+      font-size: 1.5rem; /* 24px */
+      font-weight: 600;
+      margin: 2.5rem 0 1rem;
+      color: var(--primary);
     }
+
+    /* ——— Abstract ——— */
     .abstract {
-      margin-top: 10px;
-      font-size: 18px;
-      max-width: 800px;
       text-align: justify;
+      font-size: 1.125rem; /* 18px */
     }
-    .download {
-      margin-top: 30px;
-    }
-    .download a {
+
+    /* ——— Button ——— */
+    .btn {
+      display: inline-block;
+      margin-top: 0.75rem;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 500;
       text-decoration: none;
-      font-size: 20px;
-      background-color: #007acc;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
+      transition: background 0.2s ease;
     }
-    .download a:hover {
-      background-color: #005fa3;
+
+    .btn:hover {
+      background: var(--primary-dark);
     }
-    .citation-title {
-      font-weight: bold;
-      margin-top: 50px;
-      font-size: 22px;
-    }
+
+    /* ——— BibTeX ——— */
     .bibtex {
-      background-color: #f0f0f0;
-      padding: 15px;
-      border-radius: 5px;
+      background: #f3f4f6; /* slate‑100 */
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
       font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-      margin-top: 10px;
-      max-width: 800px;
+      font-size: 0.9rem;
       white-space: pre-wrap;
+      word-break: break-all;
+      color: #374151; /* slate‑700 */
+    }
+
+    /* ——— Footer ——— */
+    .footer {
+      padding: 2rem 0 3rem;
+      text-align: center;
+      font-size: 0.875rem; /* 14px */
+      color: #6b7280; /* slate‑500 */
+    }
+
+    /* ——— Responsive tweaks ——— */
+    @media (min-width: 768px) {
+      .hero h1 {
+        font-size: 3.75rem; /* 60px */
+      }
     }
   </style>
 </head>
 <body>
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <h1>Auto‑Patching</h1>
+    <p class="subtitle">Enhancing Multi‑Hop Reasoning in Language Models</p>
+  </header>
 
-<h1>Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models</h1>
+  <!-- ===== MAIN CARD ===== -->
+  <main class="container">
+    <article class="card">
+      <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
+      <div class="institution">Independent Undergraduate Research Project</div>
 
-<div class="authors">
-  Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup>
-</div>
-<div class="institution">
-  <em>Independent Undergraduate Research Project</em>
-</div>
+      <h2 class="section-title">Abstract</h2>
+      <p class="abstract">
+        Multi‑hop questions still stump large language models (LLMs), which struggle to link information across multiple reasoning steps.
+        We introduce <strong>Auto‑Patch</strong>, a method that dynamically patches hidden states during inference to enhance multi‑hop reasoning in LLMs.
+        Building on the PatchScopes framework, Auto‑Patch selectively modifies internal representations via a learned classifier.
+        Evaluated on the <em>MuSiQue</em> dataset, Auto‑Patch lifts the solve rate from 18.45&nbsp;% (baseline) to <strong>23.63&nbsp;±&nbsp;0.7&nbsp;%</strong> (3 runs), narrowing the gap to Chain‑of‑Thought prompting (27.44&nbsp;%).
+        Our results highlight the potential of dynamic hidden‑state interventions for advancing complex reasoning in LLMs.
+      </p>
 
-<div class="abstract-title">Abstract:</div>
-<div class="abstract">
-  We propose Auto-Patching, an automated hidden state intervention method to enhance multi-hop reasoning in LLMs. 
-  Our method systematically identifies and patches key states, improving model reasoning without the need for manually designed interventions.
-</div>
+      <h2 class="section-title">Preprint</h2>
+      <a href="AutoPatch.pdf" class="btn" target="_blank">📄 Download PDF</a>
 
-<div class="download">
-  📄 <a href="Auto_Patching.pdf" target="_blank">Download the Preprint (PDF)</a>
-</div>
-
-<div class="citation-title">Cite as:</div>
-<div class="bibtex">
-@misc{jan2025autopatching,<br>
-  &nbsp;&nbsp;title={Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models},<br>
-  &nbsp;&nbsp;author={Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},<br>
-  &nbsp;&nbsp;year={2025},<br>
-  &nbsp;&nbsp;archivePrefix={arXiv},<br>
-  &nbsp;&nbsp;primaryClass={cs.CL}<br>
+      <h2 class="section-title">Citation</h2>
+      <div class="bibtex">
+@misc{jan2025autopatching,
+  title = {Auto‑Patching: Enhancing Multi‑Hop Reasoning in Language Models},
+  author = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
+  year = {2025},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.CL}
 }
-</div>
+      </div>
+    </article>
+  </main>
 
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    © 2025 Aviv Jan et al. All rights reserved.
+  </footer>
 </body>
 </html>
