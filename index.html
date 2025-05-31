@@ -2,174 +2,229 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Auto‑Patching: Enhancing Multi‑Hop Reasoning in Language Models</title>
+  <title>Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models</title>
   
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --primary: #2563eb;        /* blue‑600 */
-      --primary-dark: #1e4fbe;  /* darker shade */
-      --bg: #f8fafc;            /* slate‑50 */
-      --text: #111827;          /* slate‑900 */
+      /* Color palette */
+      --indigo-400: #6366f1;
+      --blue-500:  #3b82f6;
+      --violet-600:#7c3aed;
+      --white:     #ffffff;
+      --slate-50:  #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-700: #374151;
+      --slate-900: #111827;
     }
 
+    /* Global reset */
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Inter', Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--slate-50);
+      color: var(--slate-900);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* ——— Hero ——— */
+    /* ========= HERO ========= */
     .hero {
-      padding: 5rem 1.5rem 6rem; /* extra bottom padding for card overlap */
-      text-align: center;
-      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%); /* indigo‑500 → blue‑500 */
-      color: #ffffff;
       position: relative;
+      width: 100%;
+      padding: 6rem 1.5rem 8rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--violet-600) 0%, var(--blue-500) 100%);
+      color: var(--white);
+      overflow: hidden;
     }
 
-    .hero h1 {
-      font-size: 3rem; /* 48px */
-      font-weight: 700;
+    /* Decorative blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.6;
+      animation: float 24s ease-in-out infinite alternate;
+    }
+    .blob:nth-child(1) { width: 520px; height: 520px; background: rgba(255, 255, 255, 0.15); top: -200px; left: -180px; }
+    .blob:nth-child(2) { width: 360px; height: 360px; background: rgba(255, 255, 255, 0.08); bottom: -120px; right: -160px; }
+
+    @keyframes float {
+      to { transform: translateY(-60px) translateX(40px) scale(1.05); }
     }
 
-    .subtitle {
-      font-size: 1.25rem; /* 20px */
+    /* Gradient text for title */
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      background: linear-gradient(90deg, #fff 0%, #dbeafe 40%, #f3e8ff 60%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      font-weight: 500;
       margin-top: 0.75rem;
       opacity: 0.9;
-      font-weight: 500;
     }
 
-    /* ——— Layout ——— */
+    /* ========= CARD ========= */
     .container {
-      max-width: 900px;
-      margin: -4rem auto 2.5rem; /* pull card upward */
+      max-width: 960px;
+      margin: -5rem auto 3rem;
       padding: 0 1.5rem;
     }
 
     .card {
-      background: #ffffff;
-      border-radius: 1rem; /* 16px */
-      padding: 2.5rem 2rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border-radius: 1.25rem; /* 20px */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      padding: 3rem 2.5rem;
     }
 
-    /* ——— Metadata ——— */
+    /* ========= METADATA ========= */
     .authors {
-      font-size: 1.125rem; /* 18px */
+      font-size: 1.125rem;
       font-weight: 500;
       margin-bottom: 0.25rem;
-      color: #374151; /* slate‑700 */
+      color: var(--slate-700);
     }
 
     .institution {
-      font-size: 1rem;
       font-style: italic;
-      margin-bottom: 2rem;
-      color: #6b7280; /* slate‑500 */
+      color: #475569; /* slate-600 */
+      margin-bottom: 2.25rem;
     }
 
-    /* ——— Section titles ——— */
+    /* ========= SECTION TITLES ========= */
     .section-title {
-      font-size: 1.5rem; /* 24px */
+      font-size: 1.5rem;
       font-weight: 600;
-      margin: 2.5rem 0 1rem;
-      color: var(--primary);
+      color: var(--blue-500);
+      margin: 2.75rem 0 1rem;
     }
 
-    /* ——— Abstract ——— */
+    /* ========= TEXT ========= */
     .abstract {
       text-align: justify;
-      font-size: 1.125rem; /* 18px */
+      font-size: 1.125rem;
+      color: var(--slate-900);
     }
 
-    /* ——— Button ——— */
+    /* ========= BUTTONS ========= */
     .btn {
       display: inline-block;
-      margin-top: 0.75rem;
-      background: var(--primary);
-      color: #ffffff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.75rem;
-      font-size: 1rem;
+      margin-top: 1rem;
+      background: var(--blue-500);
+      color: var(--white);
+      padding: 0.85rem 1.75rem;
+      border-radius: 0.85rem;
+      font-size: 1.05rem;
       font-weight: 500;
       text-decoration: none;
-      transition: background 0.2s ease;
+      transition: transform 0.18s ease, background 0.18s ease;
     }
 
     .btn:hover {
-      background: var(--primary-dark);
+      transform: translateY(-3px);
+      background: #2563eb; /* blue-600 */
     }
 
-    /* ——— BibTeX ——— */
+    /* ========= BADGES ========= */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.25rem;
+    }
+
+    .badge {
+      background: var(--indigo-400);
+      color: var(--white);
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px; /* pill */
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ========= BIBTEX ========= */
     .bibtex {
-      background: #f3f4f6; /* slate‑100 */
-      border-radius: 0.75rem;
+      background: var(--slate-100);
+      border-radius: 0.9rem;
       padding: 1rem 1.25rem;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: "Courier New", monospace;
       font-size: 0.9rem;
       white-space: pre-wrap;
+      color: var(--slate-700);
       word-break: break-all;
-      color: #374151; /* slate‑700 */
     }
 
-    /* ——— Footer ——— */
+    /* ========= FOOTER ========= */
     .footer {
-      padding: 2rem 0 3rem;
       text-align: center;
-      font-size: 0.875rem; /* 14px */
-      color: #6b7280; /* slate‑500 */
-    }
-
-    /* ——— Responsive tweaks ——— */
-    @media (min-width: 768px) {
-      .hero h1 {
-        font-size: 3.75rem; /* 60px */
-      }
+      font-size: 0.85rem;
+      color: #64748b; /* slate-500 */
+      padding: 3rem 1rem 4rem;
     }
   </style>
 </head>
 <body>
+  <!-- Decorative gradient blobs -->
+  <div class="blob"></div>
+  <div class="blob"></div>
+
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <h1>Auto‑Patching</h1>
-    <p class="subtitle">Enhancing Multi‑Hop Reasoning in Language Models</p>
+    <h1 class="hero-title">Auto-Patching</h1>
+    <p class="hero-subtitle">Enhancing Multi-Hop Reasoning in Language Models</p>
   </header>
 
   <!-- ===== MAIN CARD ===== -->
   <main class="container">
     <article class="card">
-      <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
+      <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
       <div class="institution">Independent Undergraduate Research Project</div>
+
+      <!-- Key Results Badges -->
+      <div class="badges">
+        <span class="badge">+5.18 pts on <em>MuSiQue</em></span>
+        <span class="badge">23.63 ± 0.7&nbsp;% Accuracy</span>
+        <span class="badge">3× Inference Runs</span>
+      </div>
 
       <h2 class="section-title">Abstract</h2>
       <p class="abstract">
-        Multi‑hop questions still stump large language models (LLMs), which struggle to link information across multiple reasoning steps.
-        We introduce <strong>Auto‑Patch</strong>, a method that dynamically patches hidden states during inference to enhance multi‑hop reasoning in LLMs.
-        Building on the PatchScopes framework, Auto‑Patch selectively modifies internal representations via a learned classifier.
-        Evaluated on the <em>MuSiQue</em> dataset, Auto‑Patch lifts the solve rate from 18.45&nbsp;% (baseline) to <strong>23.63&nbsp;±&nbsp;0.7&nbsp;%</strong> (3 runs), narrowing the gap to Chain‑of‑Thought prompting (27.44&nbsp;%).
-        Our results highlight the potential of dynamic hidden‑state interventions for advancing complex reasoning in LLMs.
+        <strong>Multi-hop questions</strong> still stump large language models (LLMs), which struggle to link information across several reasoning steps.
+        We present <strong>Auto-Patch</strong>&nbsp;— a dynamic hidden-state intervention method that automatically <em>patches</em> internal activations during inference.
+        Built upon the PatchScopes framework, Auto-Patch employs a lightweight classifier to decide <em>where</em> and <em>how</em> to modify representations on-the-fly.
+        On the <em>MuSiQue</em> benchmark, Auto-Patch raises the solve rate from 18.45&nbsp;% to <strong>23.63&nbsp;±&nbsp;0.7&nbsp;%</strong> (3 runs), closing 40&nbsp;% of the gap to Chain-of-Thought prompting — all <em>without</em> extra tokens or retraining.
+        These findings underscore the promise of dynamic hidden-state editing for boosting complex reasoning in LLMs.
       </p>
 
       <h2 class="section-title">Preprint</h2>
-      <a href="AutoPatch.pdf" class="btn" target="_blank">📄 Download PDF</a>
+      <a href="AutoPatch.pdf" class="btn" target="_blank">📄 Download PDF</a>
 
       <h2 class="section-title">Citation</h2>
       <div class="bibtex">
 @misc{jan2025autopatching,
-  title = {Auto‑Patching: Enhancing Multi‑Hop Reasoning in Language Models},
-  author = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
-  year = {2025},
-  archivePrefix = {arXiv},
+  title        = {Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models},
+  author       = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
+  year         = {2025},
+  archivePrefix= {arXiv},
   primaryClass = {cs.CL}
 }
       </div>
@@ -178,7 +233,7 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    © 2025 Aviv Jan et al. All rights reserved.
+    © 2025&nbsp;Auto-Patch Project · All rights reserved.
   </footer>
 </body>
 </html>
