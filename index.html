@@ -255,6 +255,66 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
+    /* ===== METHOD SECTION ===== */
+    .method-overview {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .method-intro {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--slate-700);
+      margin-bottom: 1rem;
+    }
+
+    .method-steps {
+      background: var(--slate-50);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid var(--slate-200);
+    }
+
+    .method-steps h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--blue-500);
+      margin-bottom: 1rem;
+    }
+
+    .steps-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .step-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: start;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .step-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .step-number {
+      font-weight: 600;
+      color: var(--blue-500);
+      font-size: 0.9rem;
+      padding: 0.3rem 0.6rem;
+      background: white;
+      border-radius: 0.4rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .step-content {
+      line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
       .card {
         padding: 2rem 1.5rem;
@@ -366,8 +426,46 @@
 
       <!-- METHOD OVERVIEW -->
       <h2 id="method" class="section-title">Method at a Glance</h2>
-      <p class="abstract">Auto‑Patch performs <em>two</em> forward passes. Pass‑1 captures baseline hidden states. An SVM flags beneficial positions; Pass‑2 transplants selected states from a <code>source</code> layer into a <code>target</code> layer before continuing the forward pass—boosting cross‑hop coherence without touching weights.</p>
-      <img src="autopatch.png" alt="Auto‑Patch Diagram" style="width:100%;border-radius:0.9rem;margin-top:1rem;box-shadow:0 6px 14px rgba(0,0,0,0.05);"/>
+      <div class="method-overview">
+        <p class="method-intro">
+          Auto‑Patch performs two forward passes. Pass‑1 captures baseline hidden states. An SVM flags beneficial positions; Pass‑2 transplants selected states from a source layer into a target layer before continuing the forward pass—boosting cross‑hop coherence without touching weights.
+        </p>
+        
+        <div class="method-steps">
+          <h3>Process Overview</h3>
+          <div class="steps-list">
+            <div class="step-item">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                Select the hidden state from the source layer that will be considered for patching.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                The SVM classifier evaluates whether the selected hidden state should be patched.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                If patching is needed, the hidden state is transferred to the same position in the target layer.
+              </div>
+            </div>
+            <div class="step-item">
+              <span class="step-number">4</span>
+              <div class="step-content">
+                Execute the forward pass on the patched target, incorporating the patched hidden state into the final output generation.
+              </div>
+            </div>
+          </div>
+          <p style="margin-top:1rem;color:var(--slate-700);font-style:italic;">
+            This dynamic adjustment improves the model's ability to reason across multiple steps.
+          </p>
+        </div>
+
+        <img src="autopatch.png" alt="Auto‑Patch Diagram" style="width:100%;border-radius:0.9rem;margin-top:0.5rem;box-shadow:0 6px 14px rgba(0,0,0,0.05);" />
+      </div>
 
       <!-- EXPERIMENTS -->
       <h2 id="experiments" class="section-title">Experiments</h2>
