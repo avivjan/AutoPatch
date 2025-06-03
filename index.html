@@ -203,21 +203,36 @@
       margin: 2rem 0;
     }
 
-    .btn {
+    .arxiv-icon {
+      width: 16px;
+      height: 16px;
       display: inline-block;
-      background: #B31B1B;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      margin-top: -2px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' /%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      background: #4a77e5;
       color: var(--white);
-      padding: 0.85rem 1.75rem;
-      border-radius: 0.85rem;
-      font-size: 1.05rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
       font-weight: 500;
       text-decoration: none;
       transition: transform 0.18s ease, background 0.18s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     } 
 
     .btn:hover {
-      transform: translateY(-3px);
-      background: #8B1515;
+      transform: translateY(-1px);
+      background: #3b66d4;
     }
 
     .btn.secondary {
@@ -396,20 +411,6 @@
       line-height: 1.6;
     }
 
-    .arxiv-icon {
-      width: 20px;
-      height: 20px;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 0.5rem;
-      margin-top: -2px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 60' fill='%23ffffff'%3E%3Cpath d='M12 40V20h4l6 12 6-12h4v20h-4V26l-6 12-6-12v14h-4zm35-10h8v4h-8v6h-4V20h14v4h-10v6zm25 10h-4l-2-5h-8l-2 5h-4l8-20h4l8 20zm-7.4-9l-2.6-7-2.6 7h5.2zm25.4 9h-4l-6-8.5V40h-4V20h4l6 8.5V20h4v20z'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      filter: brightness(0) invert(1);
-    }
-
     @media (max-width: 768px) {
       .card {
         padding: 2rem 1.5rem;
@@ -482,7 +483,7 @@
 
       <!-- LINKS -->
       <div class="buttons-container">
-        <a href="https://arxiv.org/abs/2506.00483" target="_blank" class="btn"><span class="arxiv-icon"></span>View on arXiv</a>
+        <a href="https://arxiv.org/abs/2506.00483" target="_blank" class="btn">📄 View on arXiv</a>
         <a href="https://github.com/omertalmi5/Auto-Patching" target="_blank" class="btn secondary"><i class="uil uil-github"></i> GitHub Repo</a>
       </div>
 
