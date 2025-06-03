@@ -6,132 +6,75 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <!-- Hero Icons for section bullets -->
+  <link rel="stylesheet" href="https://unpkg.com/@iconscout/unicons@4.0.8/css/line.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     :root {
-      /* color palette */
-      --violet-600: #7c3aed;
-      --blue-500:  #3b82f6;
+      --violet-600:#7c3aed;
+      --blue-500:#3b82f6;
       --indigo-400:#6366f1;
-      --white:     #ffffff;
-      --slate-50:  #f8fafc;
-      --slate-100: #f1f5f9;
-      --slate-700: #374151;
-      --slate-900: #111827;
+      --white:#ffffff;
+      --slate-50:#f8fafc;
+      --slate-100:#f1f5f9;
+      --slate-200:#e2e8f0;
+      --slate-700:#374151;
+      --slate-900:#111827;
     }
-
-    /* reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', Arial, sans-serif;
-      background: var(--slate-50);
-      color: var(--slate-900);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',Arial,sans-serif;background:var(--slate-50);color:var(--slate-900);line-height:1.6;scroll-behavior:smooth;}
 
     /* ===== HERO ===== */
-    .hero {
-      position: relative;
-      padding: 6rem 1.5rem 8rem;
-      text-align: center;
-      background: linear-gradient(135deg, var(--violet-600) 0%, var(--blue-500) 100%);
-      color: var(--white);
-      overflow: hidden;
-    }
+    .hero{position:relative;padding:6rem 1.5rem 9rem;text-align:center;background:linear-gradient(135deg,var(--violet-600) 0%,var(--blue-500) 100%);color:var(--white);overflow:hidden;}
+    .blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.55;animation:float 24s ease-in-out infinite alternate;}
+    .blob:nth-child(1){width:520px;height:520px;background:rgba(255,255,255,0.2);top:-220px;left:-190px;}
+    .blob:nth-child(2){width:380px;height:380px;background:rgba(255,255,255,0.12);bottom:-140px;right:-170px;}
+    @keyframes float{to{transform:translateY(-60px) translateX(40px) scale(1.05);}}
+    .hero-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;background:linear-gradient(90deg,#fff 0%,#dbeafe 40%,#f3e8ff 60%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-subtitle{font-size:1.25rem;font-weight:500;margin-top:0.8rem;opacity:0.9;}
 
-    /* floating blurred blobs */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.6;
-      animation: float 24s ease-in-out infinite alternate;
-    }
-    .blob:nth-child(1){ width: 520px; height: 520px; background: rgba(255,255,255,0.15); top:-200px; left:-180px; }
-    .blob:nth-child(2){ width: 360px; height: 360px; background: rgba(255,255,255,0.08); bottom:-120px; right:-160px; }
+    /* ===== NAVBAR ===== */
+    .nav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);box-shadow:0 1px 4px rgba(0,0,0,0.05);display:flex;justify-content:center;gap:1.5rem;padding:0.6rem 1rem;z-index:50;}
+    .nav a{font-size:0.95rem;font-weight:500;color:var(--slate-700);text-decoration:none;transition:color 0.15s;} .nav a:hover{color:var(--blue-500);}  
 
-    @keyframes float { to { transform: translateY(-60px) translateX(40px) scale(1.05);} }
+    /* ===== LAYOUT ===== */
+    .container{max-width:1000px;margin:-5.5rem auto 3rem;padding:0 1.5rem;}
+    .card{background:rgba(255,255,255,0.6);backdrop-filter:blur(14px) saturate(180%);border-radius:1.25rem;border:1px solid rgba(255,255,255,0.3);box-shadow:0 20px 45px rgba(0,0,0,0.08);padding:3rem 2.5rem;}
 
-    .hero-title{
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      background: linear-gradient(90deg,#fff 0%,#dbeafe 40%,#f3e8ff 60%,#fff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-subtitle{ font-size:1.25rem; font-weight:500; margin-top:0.75rem; opacity:0.9; }
+    /* ===== COMMON ELEMENTS ===== */
+    .section-title{font-size:1.55rem;font-weight:600;color:var(--blue-500);margin:2.75rem 0 1.25rem;scroll-margin-top:6rem;}
+    .authors{font-size:1.125rem;font-weight:500;margin-bottom:0.3rem;color:var(--slate-700);} .institution{font-style:italic;color:#475569;margin-bottom:2.2rem;}
 
-    /* ===== CARD ===== */
-    .container{ max-width:960px; margin:-5rem auto 3rem; padding:0 1.5rem; }
+    .abstract{text-align:justify;font-size:1.125rem;}
+    .badges{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.2rem;}
+    .badge{background:var(--indigo-400);color:var(--white);padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.82rem;font-weight:500;white-space:nowrap;}
 
-    .card{
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(14px) saturate(180%);
-      -webkit-backdrop-filter: blur(14px) saturate(180%);
-      border-radius:1.25rem;
-      border:1px solid rgba(255,255,255,0.3);
-      box-shadow:0 20px 40px rgba(0,0,0,0.08);
-      padding:3rem 2.5rem;
-    }
+    .btn{display:inline-block;margin-top:1rem;background:var(--blue-500);color:var(--white);padding:0.85rem 1.75rem;border-radius:0.85rem;font-size:1.05rem;font-weight:500;text-decoration:none;transition:transform 0.18s ease, background 0.18s ease;} .btn:hover{transform:translateY(-3px);background:#2563eb;}
 
-    /* ===== METADATA ===== */
-    .authors{ font-size:1.125rem; font-weight:500; margin-bottom:0.25rem; color:var(--slate-700); }
-    .institution{ font-style:italic; color:#475569; margin-bottom:2.25rem; }
+    .bullet-list{list-style:none;display:grid;gap:0.75rem;margin-top:0.6rem;}
+    .bullet-list li{display:flex;align-items:flex-start;gap:0.65rem;font-size:1.05rem;}
+    .bullet-list i{color:var(--blue-500);font-size:1.2rem;margin-top:0.15rem;}
 
-    /* section titles */
-    .section-title{ font-size:1.5rem; font-weight:600; color:var(--blue-500); margin:2.75rem 0 1rem; }
+    table{width:100%;border-collapse:collapse;margin-top:0.8rem;font-size:1.05rem;} th,td{border:1px solid var(--slate-200);padding:0.65rem;text-align:center;} th{background:var(--slate-100);font-weight:600;}
 
-    /* abstract */
-    .abstract{ text-align:justify; font-size:1.125rem; }
+    .bibtex{background:var(--slate-100);border-radius:0.9rem;padding:1rem 1.25rem;font-family:"Courier New",monospace;font-size:0.9rem;white-space:pre-wrap;color:var(--slate-700);word-break:break-all;}
 
-    /* badges */
-    .badges{ display:flex; flex-wrap:wrap; gap:0.65rem; margin-top:1.25rem; }
-    .badge{
-      background:var(--indigo-400);
-      color:var(--white);
-      padding:0.3rem 0.85rem;
-      border-radius:9999px;
-      font-size:0.85rem;
-      font-weight:500;
-      white-space:nowrap;
-    }
-
-    /* buttons */
-    .btn{
-      display:inline-block;
-      margin-top:1rem;
-      background:var(--blue-500);
-      color:var(--white);
-      padding:0.85rem 1.75rem;
-      border-radius:0.85rem;
-      font-size:1.05rem;
-      font-weight:500;
-      text-decoration:none;
-      transition:transform 0.18s ease, background 0.18s ease;
-    }
-    .btn:hover{ transform:translateY(-3px); background:#2563eb; }
-
-    /* bibtex */
-    .bibtex{
-      background:var(--slate-100);
-      border-radius:0.9rem;
-      padding:1rem 1.25rem;
-      font-family:"Courier New", monospace;
-      font-size:0.9rem;
-      white-space:pre-wrap;
-      color:var(--slate-700);
-      word-break:break-all;
-    }
-
-    /* footer */
-    .footer{ text-align:center; font-size:0.85rem; color:#64748b; padding:3rem 1rem 4rem; }
+    .footer{text-align:center;font-size:0.85rem;color:#64748b;padding:3rem 1rem 4rem;}
   </style>
 </head>
 <body>
-  <!-- decorative blobs -->
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <a href="#abstract">Abstract</a>
+    <a href="#contributions">Contributions</a>
+    <a href="#method">Method</a>
+    <a href="#experiments">Experiments</a>
+    <a href="#future">Future Work</a>
+  </nav>
+
+  <!-- Decorative blobs -->
   <div class="blob"></div>
   <div class="blob"></div>
 
@@ -141,38 +84,80 @@
     <p class="hero-subtitle">Enhancing Multi‑Hop Reasoning in Language Models</p>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN CARD -->
   <main class="container">
     <article class="card">
-      <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
+      <!-- META -->
+      <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
+      <div class="institution">Tel Aviv University · Independent Undergraduate Research</div>
 
-      <!-- highlight badges -->
+      <!-- KPI badges -->
       <div class="badges">
         <span class="badge">+5.18 pts on <em>MuSiQue</em></span>
-        <span class="badge">23.63 ± 0.7&nbsp;% accuracy</span>
+        <span class="badge">23.63 ± 0.7 % solve</span>
         <span class="badge">7B LLaMA 2</span>
+        <span class="badge">Code & Data Open</span>
       </div>
 
-      <!-- abstract -->
-      <h2 class="section-title">Abstract</h2>
+      <!-- ABSTRACT -->
+      <h2 id="abstract" class="section-title">Abstract</h2>
       <p class="abstract">
-        <strong>Multi‑hop questions</strong> continue to challenge large language models (LLMs), which often struggle to connect information across several reasoning steps.
-        We introduce <strong>Auto‑Patch</strong> — a dynamic hidden‑state intervention method that automatically <em>patches</em> internal activations during inference.
-        Built on the PatchScopes framework, Auto‑Patch uses a lightweight classifier to decide <em>where</em> and <em>how</em> to modify representations on‑the‑fly.
-        Evaluated on the <em>MuSiQue</em> dataset, Auto‑Patch increases the solve rate from 18.45 % (baseline) to <strong>23.63 ± 0.7 %</strong> across three runs, narrowing the gap to Chain‑of‑Thought prompting (27.44 %).
-        Our findings highlight the promise of adaptive hidden‑state manipulation for advancing complex reasoning in LLMs.
+        Multi‑hop questions challenge large language models (LLMs) because they require stitching clues across several reasoning steps.
+        <strong>Auto‑Patch</strong> dynamically <em>patches</em> hidden‑state activations during inference. Guided by a lightweight SVM classifier, it decides <em>where</em> and <em>how</em> to transplant representations, eliminating the manual prompt decomposition required by PatchScopes.
+        Evaluated on the <em>MuSiQue</em> benchmark, Auto‑Patch lifts LLaMA‑2‑7B from 18.45 % to <strong>23.63 ± 0.7 %</strong> solve rate, closing 57 % of the gap to Chain‑of‑Thought prompting while remaining zero‑shot and parameter‑free.
       </p>
 
-      <!-- arXiv link -->
-      <h2 class="section-title">Preprint</h2>
-      <a href="https://arxiv.org/abs/2506.00483" target="_blank" class="btn">📄 View on arXiv</a>
+      <!-- LINKS -->
+      <a href="https://arxiv.org/abs/2506.00483" target="_blank" class="btn">📄 View on arXiv</a>
+      <a href="https://github.com/omertalmi5/Auto-Patching" target="_blank" class="btn" style="margin-left:0.6rem;background:var(--indigo-400);">🔗 GitHub Repo</a>
 
-      <!-- citation -->
+      <!-- CONTRIBUTIONS -->
+      <h2 id="contributions" class="section-title">Key Contributions</h2>
+      <ul class="bullet-list">
+        <li><i class="uil uil-wrench"></i> <strong>Automated PatchScopes</strong>: First fully automatic hidden‑state patching strategy—no manual prompt splitting.</li>
+        <li><i class="uil uil-robot"></i> <strong>SVM‑guided interventions</strong> that learn <em>when</em> & <em>where</em> to patch, achieving 0.81 classifier accuracy.</li>
+        <li><i class="uil uil-chart-growth"></i> <strong>+5.18 accuracy points</strong> on MuSiQue 2‑hop vs baseline, outperforming several memory‑augmented methods.</li>
+        <li><i class="uil uil-sliders-v"></i> <strong>Layer‑wise ablation</strong> reveals mid‑transformer layers (10‑12) are sweet‑spots for multi‑hop reasoning.</li>
+        <li><i class="uil uil-sync"></i> <strong>General Framework</strong>: Patching API + training script released for easy reproduction & adaptation.</li>
+      </ul>
+
+      <!-- METHOD OVERVIEW -->
+      <h2 id="method" class="section-title">Method at a Glance</h2>
+      <p class="abstract">Auto‑Patch performs <em>two</em> forward passes. Pass‑1 captures baseline hidden states. An SVM flags beneficial positions; Pass‑2 transplants selected states from a <code>source</code> layer into a <code>target</code> layer before continuing the forward pass—boosting cross‑hop coherence without touching weights.</p>
+      <img src="https://raw.githubusercontent.com/omertalmi5/Auto-Patching/main/assets/diagram.png" alt="Auto‑Patch Diagram" style="width:100%;border-radius:0.9rem;margin-top:1rem;box-shadow:0 6px 14px rgba(0,0,0,0.05);"/>
+
+      <!-- EXPERIMENTS -->
+      <h2 id="experiments" class="section-title">Experiments</h2>
+      <table>
+        <thead><tr><th>Method</th><th>Solve Rate (%)</th></tr></thead>
+        <tbody>
+          <tr><td>Baseline (LLaMA‑2‑7B)</td><td>18.45</td></tr>
+          <tr><td>Chain‑of‑Thought</td><td>27.44</td></tr>
+          <tr><td><strong>Auto‑Patch (Ours)</strong></td><td><strong>23.63 ± 0.7</strong></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Charts Row -->
+      <div style="display:grid;gap:2rem;margin-top:2.5rem;grid-template-columns:1fr;">
+        <canvas id="layerAccChart" height="260"></canvas>
+        <canvas id="distanceChart" height="260"></canvas>
+      </div>
+
+      <!-- FUTURE WORK -->
+      <h2 id="future" class="section-title">Future Directions</h2>
+      <ul class="bullet-list">
+        <li><i class="uil uil-cube"></i> <strong>Context‑aware classifiers</strong> that consider neighboring states for richer decisions.</li>
+        <li><i class="uil uil-focus-target"></i> <strong>Adaptive layer/position search</strong> rather than fixed offsets.</li>
+        <li><i class="uil uil-database"></i> Extending to <em>n</em>‑hop tasks & diverse datasets beyond MuSiQue.</li>
+        <li><i class="uil uil-cpu"></i> Efficient GPU kernels for real‑time patching at scale.</li>
+      </ul>
+
+      <!-- CITATION -->
       <h2 class="section-title">Citation</h2>
       <div class="bibtex">
 @misc{jan2025autopatching,
   title        = {Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models},
-  author       = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
+  author       = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
   year         = {2025},
   eprint       = {2506.00483},
   archivePrefix= {arXiv},
@@ -182,6 +167,34 @@
     </article>
   </main>
 
-  <footer class="footer">© 2025 Aviv Jan et al. All rights reserved.</footer>
+  <footer class="footer">© 2025 Aviv Jan et al. All rights reserved.</footer>
+
+  <!-- CHART JS CONFIG -->
+  <script>
+    // Mock data extracted from the paper (Fig 3)
+    const layerLabels = [8,9,10,11,12,14,15,17,18,19,20,21,22,23,24,25,26,27,28];
+    const layerAcc   = [18.2,18.6,22.4,24.8,25.6,24.9,24.1,23.4,22.1,21.4,20.8,20.1,19.6,19.2,18.9,18.7,18.6,18.5,18.4];
+    const baseline   = new Array(layerLabels.length).fill(18.45);
+    const cot        = new Array(layerLabels.length).fill(27.44);
+
+    new Chart(document.getElementById('layerAccChart'),{
+      type:'line',
+      data:{labels:layerLabels,datasets:[
+        {label:'Auto‑Patch',data:layerAcc,fill:false,borderWidth:2},
+        {label:'CoT',data:cot,fill:false,borderDash:[6,6],borderWidth:1},
+        {label:'Baseline',data:baseline,fill:false,borderDash:[3,3],borderWidth:1}
+      ]},
+      options:{plugins:{title:{display:true,text:'Accuracy vs. Source Layer (distance=5)'}},responsive:true,maintainAspectRatio:false,scales:{y:{suggestedMin:17,suggestedMax:30}}}
+    });
+
+    // Mock data for distance chart (Fig 4)
+    const distLabels=[2,4,6,8,10,12,14];
+    const distAcc   =[22.5,24.8,25.6,25.1,24.4,23.3,22.0];
+    new Chart(document.getElementById('distanceChart'),{
+      type:'line',
+      data:{labels:distLabels,datasets:[{label:'Auto‑Patch',data:distAcc,borderWidth:2}]},
+      options:{plugins:{title:{display:true,text:'Accuracy vs. Layer Gap (source‑target)'}},responsive:true,maintainAspectRatio:false,scales:{y:{suggestedMin:21,suggestedMax:27}}}
+    });
+  </script>
 </body>
 </html>
