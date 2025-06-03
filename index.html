@@ -137,11 +137,64 @@
 
     /* ===== COMMON ELEMENTS ===== */
     .section-title{font-size:1.55rem;font-weight:600;color:var(--blue-500);margin:2.75rem 0 1.25rem;scroll-margin-top:6rem;}
-    .authors{font-size:1.125rem;font-weight:500;margin-bottom:0.3rem;color:var(--slate-700);} .institution{font-style:italic;color:#475569;margin-bottom:2.2rem;}
 
-    .abstract{text-align:justify;font-size:1.125rem;}
-    .badges{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.2rem;}
-    .badge{background:var(--indigo-400);color:var(--white);padding:0.35rem 0.9rem;border-radius:9999px;font-size:0.82rem;font-weight:500;white-space:nowrap;}
+    .meta-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .authors {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--slate-700);
+      margin-bottom: 0.5rem;
+    } 
+
+    .institution {
+      font-style: italic;
+      color: #475569;
+      margin-bottom: 2rem;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .badge {
+      background: var(--indigo-400);
+      color: var(--white);
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: transform 0.2s ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+    }
+
+    .abstract {
+      text-align: justify;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      margin: 1.5rem 0;
+      hyphens: auto;
+    }
+
+    .abstract strong {
+      color: var(--slate-900);
+    }
+
+    .abstract em {
+      font-style: italic;
+      color: var(--slate-700);
+    }
 
     .btn{display:inline-block;margin-top:1rem;background:var(--blue-500);color:var(--white);padding:0.85rem 1.75rem;border-radius:0.85rem;font-size:1.05rem;font-weight:500;text-decoration:none;transition:transform 0.18s ease, background 0.18s ease;} .btn:hover{transform:translateY(-3px);background:#2563eb;}
 
@@ -253,27 +306,27 @@
   <main class="container">
     <article class="card">
       <!-- META -->
-      <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
-      <div class="institution">Tel Aviv University</div>
+      <div class="meta-section">
+        <div class="authors">Aviv Jan<sup>*</sup>, Daniel Tahory<sup>*</sup>, Or Talmi<sup>*</sup>, Or Abo Mokh<sup>*</sup></div>
+        <div class="institution">Tel Aviv University</div>
 
-      <!-- KPI badges -->
-      <div class="badges">
-        <span class="badge">+5.18 pts on <em>MuSiQue</em></span>
-        <span class="badge">23.63 ± 0.7 % solve</span>
-        <span class="badge">7B LLaMA 2</span>
-        <span class="badge">Code & Data Open</span>
+        <!-- KPI badges -->
+        <div class="badges">
+          <span class="badge">+5.18 pts on <em>MuSiQue</em></span>
+          <span class="badge">23.63 ± 0.7 % solve</span>
+          <span class="badge">7B LLaMA 2</span>
+          <span class="badge">Code & Data Open</span>
+        </div>
       </div>
 
       <!-- ABSTRACT -->
       <h2 id="abstract" class="section-title">Abstract</h2>
       <p class="abstract">
-        Multi‑hop questions challenge large language models (LLMs) because they require stitching clues across several reasoning steps.
-        <strong>Auto‑Patch</strong> dynamically <em>patches</em> hidden‑state activations during inference. Guided by a lightweight SVM classifier, it decides <em>where</em> and <em>how</em> to transplant representations, eliminating the manual prompt decomposition required by PatchScopes.
-        Evaluated on the <em>MuSiQue</em> benchmark, Auto‑Patch lifts LLaMA‑2‑7B from 18.45 % to <strong>23.63 ± 0.7 %</strong> solve rate, closing 57 % of the gap to Chain‑of‑Thought prompting while remaining zero‑shot and parameter‑free.
+        Multi‑hop questions challenge large language models (LLMs) because they require stitching clues across several reasoning steps. <strong>Auto‑Patch</strong> dynamically <em>patches</em> hidden‑state activations during inference. Guided by a lightweight SVM classifier, it decides <em>where</em> and <em>how</em> to transplant representations, eliminating the manual prompt decomposition required by PatchScopes. Evaluated on the <em>MuSiQue</em> benchmark, Auto‑Patch lifts LLaMA‑2‑7B from 18.45% to <strong>23.63 ± 0.7%</strong> solve rate, closing 57% of the gap to Chain‑of‑Thought prompting while remaining zero‑shot and parameter‑free.
       </p>
 
       <!-- LINKS -->
-      <a href="https://arxiv.org/abs/2506.00483" target="_blank" class="btn">📄 View on arXiv</a>
+      <a href="https://arxiv.org/abs/2506.00483" target="_blank" class="btn">📄 View on arXiv</a>
       <a href="https://github.com/omertalmi5/Auto-Patching" target="_blank" class="btn" style="margin-left:0.6rem;background:var(--indigo-400);">🔗 GitHub Repo</a>
 
       <!-- CONTRIBUTIONS -->
@@ -355,7 +408,7 @@
         <li>
           <i class="uil uil-database"></i>
           <div>
-            Extending to <em>n</em>‑hop tasks & diverse datasets beyond MuSiQue.
+        <strong> Extending to <em>n</em>‑hop</strong>  tasks & diverse datasets beyond MuSiQue.
           </div>
         </li>
         <li>
@@ -371,7 +424,7 @@
       <div class="bibtex">
 @misc{jan2025autopatching,
   title        = {Auto-Patching: Enhancing Multi-Hop Reasoning in Language Models},
-  author       = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
+  author       = {Aviv Jan and Daniel Tahory and Or Talmi and Or Abo Mokh},
   year         = {2025},
   eprint       = {2506.00483},
   archivePrefix= {arXiv},
